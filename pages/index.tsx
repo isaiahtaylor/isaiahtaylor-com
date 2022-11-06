@@ -6,6 +6,7 @@ import { ThemeContext } from '../contexts/themeContext'
 
 import { createClient } from "next-sanity";
 import { useContext, useEffect, useState } from 'react';
+import Link from 'next/link'
 
 const client = createClient({
   projectId: "tyc9omzx",
@@ -20,80 +21,49 @@ async function getPosts() {
   return posts;
 }
 
-function getPreferredColorScheme() {
-  if (typeof window !== 'undefined') {
-    if (window.matchMedia) {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
-      } else {
-        return 'light';
-      }
-    }
-  }
-  return 'light';
-}
-
-const Home: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({posts}) => {
-
-  const [colorMode, setColorMode] = useState<'light' | 'dark'>('light');
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (window.matchMedia) {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          setColorMode('dark');
-        } else {
-          setColorMode('light');
-        }
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-          setColorMode(e.matches ? 'dark' : 'light');
-        });
-      }
-    }
-  }, []);
+const Home: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ posts }) => {
 
   return (
-    <ThemeContext.Provider value={{
-      colorMode,
-      toggleTheme: () => {
-        setColorMode(colorMode === 'light' ? 'dark' : 'light');
-      }
-    }}>
-      <div className='bg-white dark:bg-raisin-black text-eerie-black dark:text-platinum'>
-        <Head>
-          <title>Isaiah Taylor</title>
-          <meta name="description" content="Isaiah Taylor's writings" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+    <ThemeContext.Consumer>
+      {({ colorMode, toggleTheme }) => (
+        <div className='bg-white dark:bg-raisin-black text-eerie-black dark:text-platinum'>
+          <Head>
+            <title>Isaiah Taylor</title>
+            <meta name="description" content="Isaiah Taylor's writings" />
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
 
-        <main className='flex'>
-          <div className='flex flex-col justify-between grow p-[100px]'>
-            <div className='flex flex-col gap-5'>
-              {posts.map((post) => (
-                <div className='font-display font-bold ' key={post._id}>
-                  <h1 className='text-4xl'>{post.title}</h1>
-                  {/* <p>{post.body}</p> */}
-                </div>
-              ))}
-            </div>
+          <main className='flex'>
+            <div className='flex flex-col justify-between grow p-[100px]'>
+              <div className='flex flex-col gap-5'>
+                {posts.map((post) => (
+                  <div className='font-display font-bold ' key={post._id}>
+                    <Link href={`/${post.slug.current}`}>
+                      <h1 className='text-4xl cursor-pointer'>{post.title}</h1>
+                    </Link>
+                    {/* <p>{post.body}</p> */}
+                  </div>
+                ))}
+              </div>
 
-            <div className='flex flex-col font-display font-bold text-xl'>
-              <p>Twitter</p>
-              <p>Instagram</p>
-              <p>LinkedIn</p>
+              <div className='flex flex-col font-display font-bold text-xl'>
+                <p>Twitter</p>
+                <p>Instagram</p>
+                <p>LinkedIn</p>
+              </div>
             </div>
-          </div>
-          <div className='flex justify-center items-center align-middle w-[600px] h-screen'>
-            <Image
-              src={colorMode === 'dark' ? "/IT-dark.svg" : "/IT.svg"}
-              alt="Isaiah Taylor"
-              width={350}
-              height={350}
-            />
-          </div>
-        </main>
-      </div>
-    </ThemeContext.Provider>
+            <div className='flex justify-center items-center align-middle w-[600px] h-screen'>
+              <Image
+                src={colorMode === 'dark' ? "/IT-dark.svg" : "/IT.svg"}
+                alt="Isaiah Taylor"
+                width={350}
+                height={350}
+              />
+            </div>
+          </main>
+        </div>
+      )}
+    </ThemeContext.Consumer>
   )
 }
 

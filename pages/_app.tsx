@@ -1,8 +1,36 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+import { useState, useEffect } from 'react';
+import { ThemeContext } from '../contexts/themeContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  const [colorMode, setColorMode] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (window.matchMedia) {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          setColorMode('dark');
+        } else {
+          setColorMode('light');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          setColorMode(e.matches ? 'dark' : 'light');
+        });
+      }
+    }
+  }, []);
+
+  return (
+    <ThemeContext.Provider value={{
+      colorMode,
+      toggleTheme: () => {
+        setColorMode(colorMode === 'light' ? 'dark' : 'light');
+      }
+    }}>
+      <Component {...pageProps} />
+    </ThemeContext.Provider>
+  )
 }
 
 export default MyApp
