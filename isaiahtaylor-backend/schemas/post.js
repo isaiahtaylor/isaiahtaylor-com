@@ -20,7 +20,7 @@ export default {
     },
     {
       name: 'body',
-      type: 'string',
+      type: 'blockContent',
       title: 'Body',
       description: 'Markdown post.'
     }
