@@ -32,7 +32,6 @@ async function getPosts() {
 const Home: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ posts }) => {
-  console.log(posts);
   return (
     <ThemeContext.Consumer>
       {({ colorMode, toggleTheme }) => (
