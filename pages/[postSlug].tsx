@@ -58,8 +58,13 @@ const PostPage: NextPage<
             <RightSide />
             <div className="flex flex-col lg:pr-[600px] p-8 lg:p-[100px]">
               <div className="flex flex-col gap-1">
-                <div className="font-display font-bold text-granite-gray dark:text-spanish-gray text-[20px]">
-                  ISAIAH TAYLOR
+                <div
+                  className="font-display font-bold text-granite-gray dark:text-spanish-gray text-2xl"
+                  style={{
+                    fontVariant: "small-caps",
+                  }}
+                >
+                  Isaiah Taylor
                 </div>
                 <div className="flex flex-col gap-5 font-display text-[40px] font-bold">
                   {post.title}

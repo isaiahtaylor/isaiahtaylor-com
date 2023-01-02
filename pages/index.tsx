@@ -5,11 +5,9 @@ import type {
 } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import { ThemeContext } from "../contexts/themeContext";
 
 import { createClient } from "next-sanity";
-import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 
 import { parseISO, format } from "date-fns";
@@ -102,7 +100,7 @@ const Home: NextPage<
                         <h1 className="text-4xl">{post.title}</h1>
                         <h2 className="text-granite-gray text-xl dark:text-grayish">
                           {format(
-                            parseISO(post._updatedAt),
+                            parseISO(post._createdAt),
                             "EEEE, MMMM do, yyyy"
                           )}
                         </h2>
