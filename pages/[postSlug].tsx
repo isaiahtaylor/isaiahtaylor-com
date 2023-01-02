@@ -38,7 +38,7 @@ const PostPage: NextPage<
 
           <main className="flex flex-col lg:flex-row w-full justify-between">
             <RightSide />
-            <div className="flex flex-col lg:pr-[600px] p-14 lg:p-[100px]">
+            <div className="flex flex-col lg:pr-[600px] p-8 lg:p-[100px]">
               <div className="flex flex-col gap-1">
                 <div className="font-display font-bold text-granite-gray dark:text-spanish-gray text-[20px]">
                   ISAIAH TAYLOR
