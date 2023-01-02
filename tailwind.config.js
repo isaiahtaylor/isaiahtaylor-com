@@ -18,6 +18,7 @@ module.exports = {
         'deep-saffron': '#F39237',
         'granite-gray': '#646468',
         'spanish-gray': '#999999',
+        'grayish': '#B2B2B2',
       },
     },
 
