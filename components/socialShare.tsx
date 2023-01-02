@@ -13,30 +13,9 @@ export const SocialShare: React.FC = () => {
 
   return (
     <div className="flex gap-[8px] h-[22px]">
-      <a
-        href={`https://twitter.com/intent/tweet?url=${url}`}
-        target="_blank"
-        rel="noreferrer"
-        className="flex cursor-pointer"
-      >
-        <Twitter></Twitter>
-      </a>
-      <a
-        href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
-        target="_blank"
-        rel="noreferrer"
-        className="flex cursor-pointer"
-      >
-        <Facebook></Facebook>
-      </a>
-      <a
-        href={`https://www.linkedin.com/shareArticle?mini=true&url=${url}`}
-        target="_blank"
-        rel="noreferrer"
-        className="flex cursor-pointer"
-      >
-        <LinkedIn></LinkedIn>
-      </a>
+      <Twitter url={url}></Twitter>
+      <Facebook url={url}></Facebook>
+      <LinkedIn url={url}></LinkedIn>
     </div>
   );
 };
