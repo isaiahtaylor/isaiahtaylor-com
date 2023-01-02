@@ -11,6 +11,7 @@ import { createClient } from "next-sanity";
 import { SocialShare } from "../components/socialShare";
 
 import imageUrlBuilder from "@sanity/image-url";
+import { RightSide } from "../components/rightSide";
 
 const client = createClient({
   projectId: "tyc9omzx",
@@ -62,32 +63,7 @@ const PostPage: NextPage<
                 <PortableText value={post.body} />
               </div>
             </div>
-            <div className="flex font-display justify-center items-center align-middle w-[600px] h-screen fixed top-0 right-0">
-              <div className="flex flex-col justify-between h-screen py-[100px]">
-                <div
-                  className="flex flex-col font-display font-bold text-2xl text-right"
-                  style={{
-                    fontVariant: "small-caps",
-                    fontFamily: "Playfair Display SC",
-                  }}
-                >
-                  <p>Home</p>
-                  <p>Highlights</p>
-                  <p>About</p>
-                </div>
-                <Image
-                  src={colorMode === "dark" ? "/IT-dark.svg" : "/IT.svg"}
-                  alt="Isaiah Taylor"
-                  width={300}
-                  height={300}
-                />
-                <div className="flex flex-col font-display font-bold text-xl text-right">
-                  <p>Twitter</p>
-                  <p>Instagram</p>
-                  <p>LinkedIn</p>
-                </div>
-              </div>
-            </div>
+            <RightSide />
           </main>
         </div>
       )}

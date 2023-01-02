@@ -13,6 +13,7 @@ import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 
 import { parseISO, format } from "date-fns";
+import { RightSide } from "../components/rightSide";
 
 const client = createClient({
   projectId: "tyc9omzx",
@@ -65,20 +66,21 @@ const Home: NextPage<
                 ))}
               </div>
 
-              <div className="flex flex-col font-display font-bold text-xl">
+              {/* <div className="flex flex-col font-display font-bold text-xl">
                 <p>Twitter</p>
                 <p>Instagram</p>
                 <p>LinkedIn</p>
-              </div>
+              </div> */}
             </div>
-            <div className="flex justify-center items-center align-middle w-[600px] h-screen">
+            <RightSide />
+            {/* <div className="flex justify-center items-center align-middle w-[600px] h-screen">
               <Image
                 src={colorMode === "dark" ? "/IT-dark.svg" : "/IT.svg"}
                 alt="Isaiah Taylor"
                 width={350}
                 height={350}
               />
-            </div>
+            </div> */}
           </main>
         </div>
       )}
