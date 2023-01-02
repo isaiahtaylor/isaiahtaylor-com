@@ -14,6 +14,7 @@ import Link from "next/link";
 
 import { parseISO, format } from "date-fns";
 import { RightSide } from "../components/rightSide";
+import MyLink from "../components/myLink";
 
 const client = createClient({
   projectId: "tyc9omzx",
@@ -42,8 +43,55 @@ const Home: NextPage<
             <link rel="icon" href="/favicon.ico" />
           </Head>
 
-          <main className="flex">
-            <div className="flex flex-col justify-between grow p-[100px]">
+          <main className="w-full flex flex-col justify-center align-middle items-center lg:flex-row lg:w-auto">
+            <div className="flex flex-col justify-center items-center w-full lg:hidden pt-6">
+              <div
+                className="flex gap-1 font-display font-bold text-2xl text-center"
+                style={{
+                  fontVariant: "small-caps",
+                  fontFamily: "Playfair Display SC",
+                }}
+              >
+                <MyLink href={"/"} text={"Home"} />
+                &middot;
+                <MyLink href={"/highlights"} text={"Highlights"} />
+                &middot;
+                <MyLink href={"/about"} text={"About"} />
+              </div>
+              <Image
+                src={colorMode === "dark" ? "/IT-dark.svg" : "/IT.svg"}
+                alt="Isaiah Taylor"
+                width={200}
+                height={200}
+                className="cursor-pointer"
+              />
+              <div className="flex gap-1 pt-1 font-display font-bold text-xl text-right">
+                <a
+                  href="https://twitter.com/isaiah_p_taylor"
+                  target={"_blank"}
+                  rel="noreferrer"
+                >
+                  <p>Twitter</p>
+                </a>
+                &middot;
+                <a
+                  href="https://www.instagram.com/isaiah.p.taylor/"
+                  target={"_blank"}
+                  rel="noreferrer"
+                >
+                  <p>Instagram</p>
+                </a>
+                &middot;
+                <a
+                  href="https://www.linkedin.com/in/isaiahptaylor/"
+                  target={"_blank"}
+                  rel="noreferrer"
+                >
+                  <p>LinkedIn</p>
+                </a>
+              </div>
+            </div>
+            <div className="flex flex-col justify-between grow p-10 lg:p-[100px]">
               <div className="flex flex-col gap-5">
                 {posts.map((post) => (
                   <div
@@ -72,7 +120,9 @@ const Home: NextPage<
                 <p>LinkedIn</p>
               </div> */}
             </div>
-            <RightSide />
+            <div className="invisible lg:visible">
+              <RightSide />
+            </div>
             {/* <div className="flex justify-center items-center align-middle w-[600px] h-screen">
               <Image
                 src={colorMode === "dark" ? "/IT-dark.svg" : "/IT.svg"}
