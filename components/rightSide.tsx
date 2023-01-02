@@ -25,12 +25,22 @@ export const RightSide: React.FC = () => {
             </div>
             <Link href="/">
               <div className="h-[200px] w-[200px] relative lg:w-[300px] lg:h-[300px]">
-                <Image
-                  src={colorMode === "dark" ? "/IT-dark.svg" : "/IT.svg"}
-                  alt="Isaiah Taylor"
-                  layout="fill"
-                  className="cursor-pointer"
-                />
+                <div className="hidden dark:block">
+                  <Image
+                    src="/IT-dark.svg"
+                    alt="Isaiah Taylor"
+                    layout="fill"
+                    className="cursor-pointer"
+                  />
+                </div>
+                <div className="dark:hidden">
+                  <Image
+                    src="/IT.svg"
+                    alt="Isaiah Taylor"
+                    layout="fill"
+                    className="cursor-pointer"
+                  />
+                </div>
               </div>
             </Link>
             <div className="flex flex-row gap-1 lg:gap-0 lg:flex-col font-display font-bold text-xl text-right">
