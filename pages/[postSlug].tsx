@@ -35,8 +35,9 @@ const PostPage: NextPage<
             <link rel="icon" href="/favicon.ico" />
           </Head> */}
 
-          <main className="flex w-full justify-between">
-            <div className="flex flex-col w-[1000px] pl-[100px] pt-[100px]">
+          <main className="flex flex-col lg:flex-row w-full justify-between">
+            <RightSide />
+            <div className="flex flex-col lg:pr-[600px] p-14 lg:p-[100px]">
               <div className="flex flex-col gap-1">
                 <div className="font-display font-bold text-granite-gray dark:text-spanish-gray text-[20px]">
                   ISAIAH TAYLOR
@@ -49,12 +50,15 @@ const PostPage: NextPage<
                 </div>
               </div>
 
-              <div className="py-10">
-                <div className="relative flex h-[500px]">
+              <div className="py-10 w-full">
+                <div className="relative w-full">
                   <Image
                     src={builder.image(post.mainImage).url()}
+                    width="100%"
+                    // height="100%"
+                    // objectFit="contain"
                     layout="fill"
-                    objectFit="contain"
+                    alt="image"
                   />
                 </div>
               </div>
@@ -63,7 +67,6 @@ const PostPage: NextPage<
                 <PortableText value={post.body} />
               </div>
             </div>
-            <RightSide />
           </main>
         </div>
       )}
