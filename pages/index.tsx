@@ -41,55 +41,9 @@ const Home: NextPage<
           </Head>
 
           <main className="w-full flex flex-col justify-center align-middle items-center lg:flex-row lg:w-auto">
-            <div className="flex flex-col justify-center items-center w-full lg:hidden pt-6">
-              <div
-                className="flex gap-1 font-display font-bold text-2xl text-center"
-                style={{
-                  fontVariant: "small-caps",
-                  fontFamily: "Playfair Display SC",
-                }}
-              >
-                <MyLink href={"/"} text={"Home"} />
-                &middot;
-                <MyLink href={"/highlights"} text={"Highlights"} />
-                &middot;
-                <MyLink href={"/about"} text={"About"} />
-              </div>
-              <Image
-                src={colorMode === "dark" ? "/IT-dark.svg" : "/IT.svg"}
-                alt="Isaiah Taylor"
-                width={200}
-                height={200}
-                className="cursor-pointer"
-              />
-              <div className="flex gap-1 pt-1 font-display font-bold text-xl text-right">
-                <a
-                  href="https://twitter.com/isaiah_p_taylor"
-                  target={"_blank"}
-                  rel="noreferrer"
-                >
-                  <p>Twitter</p>
-                </a>
-                &middot;
-                <a
-                  href="https://www.instagram.com/isaiah.p.taylor/"
-                  target={"_blank"}
-                  rel="noreferrer"
-                >
-                  <p>Instagram</p>
-                </a>
-                &middot;
-                <a
-                  href="https://www.linkedin.com/in/isaiahptaylor/"
-                  target={"_blank"}
-                  rel="noreferrer"
-                >
-                  <p>LinkedIn</p>
-                </a>
-              </div>
-            </div>
+            <RightSide />
             <div className="flex flex-col justify-between grow p-10 lg:p-[100px] lg:pr-[600px]">
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-7">
                 {posts.map((post) => (
                   <div
                     className="font-display font-bold cursor-pointer"
