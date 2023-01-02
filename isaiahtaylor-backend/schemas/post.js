@@ -20,9 +20,13 @@ export default {
     },
     {
       name: 'body',
-      type: 'blockContent',
+      type: 'array',
       title: 'Body',
-      description: 'Markdown post.'
+      of: [
+        {
+          type: 'block',
+        },
+      ],
     }
   ]
 };
