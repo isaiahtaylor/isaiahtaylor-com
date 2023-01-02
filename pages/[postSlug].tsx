@@ -13,6 +13,7 @@ import { SocialShare } from "../components/socialShare";
 import imageUrlBuilder from "@sanity/image-url";
 import { RightSide } from "../components/rightSide";
 import { Post } from "../schema";
+import Head from "next/head";
 
 const client = createClient({
   projectId: "tyc9omzx",
@@ -26,15 +27,32 @@ const builder = imageUrlBuilder(client);
 const PostPage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ post }) => {
+  const mainImage = builder.image(post.mainImage!);
+  const socialImage = mainImage.width(600);
   return (
     <ThemeContext.Consumer>
       {({ colorMode }) => (
         <div className="bg-white dark:bg-raisin-black text-eerie-black dark:text-platinum">
-          {/* <Head>
-            <title>{post.title} | Isaiah Taylor</title>
-            <meta name="description" content="Isaiah Taylor's writings" />
-            <link rel="icon" href="/favicon.ico" />
-          </Head> */}
+          <Head>
+            <title>{`${post.title} | Isaiah Taylor`}</title>
+            <meta
+              property="og:title"
+              content={`${post.title} | Isaiah Taylor`}
+            />
+            <meta property="og:image" content={socialImage.url()} />
+            <meta property="og:description" content={post.description} />
+            {/* twitter */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:site" content="@isaiah_taylor" />
+            <meta name="twitter:creator" content="@isaiah_taylor" />
+            <meta
+              name="twitter:title"
+              content={`${post.title} | Isaiah Taylor`}
+            />
+            <meta name="twitter:description" content={post.description} />
+            <meta name="twitter:image" content={socialImage.url()} />
+            <meta name="twitter:image:alt" content={post.title} />
+          </Head>
 
           <main className="flex flex-col lg:flex-row w-full justify-between">
             <RightSide />
@@ -54,7 +72,7 @@ const PostPage: NextPage<
               <div className="py-10 w-full">
                 <div className="relative w-full">
                   <Image
-                    src={builder.image(post.mainImage!).url()}
+                    src={mainImage.url()}
                     style={{ height: "auto", width: "100%" }}
                     width={1000}
                     height={1000}

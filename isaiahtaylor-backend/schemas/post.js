@@ -27,6 +27,12 @@ export default {
           type: 'block',
         },
       ],
-    }
+    },
+    {
+      name: 'description',
+      type: 'text',
+      title: 'Description',
+      description: 'This text will be used in the meta description for SEO',
+    },
   ]
 };

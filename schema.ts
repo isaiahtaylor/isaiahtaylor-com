@@ -76,6 +76,13 @@ export interface Post extends SanityDocument {
    *
    */
   body?: Array<SanityKeyed<SanityBlock>>;
+
+  /**
+   * Description — `text`
+   *
+   * This text will be used in the meta description for SEO
+   */
+  description?: string;
 }
 
 export type BlockContent = Array<
