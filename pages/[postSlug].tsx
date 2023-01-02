@@ -12,6 +12,7 @@ import { SocialShare } from "../components/socialShare";
 
 import imageUrlBuilder from "@sanity/image-url";
 import { RightSide } from "../components/rightSide";
+import { Post } from "../schema";
 
 const client = createClient({
   projectId: "tyc9omzx",
@@ -53,18 +54,17 @@ const PostPage: NextPage<
               <div className="py-10 w-full">
                 <div className="relative w-full">
                   <Image
-                    src={builder.image(post.mainImage).url()}
-                    width="100%"
-                    // height="100%"
-                    // objectFit="contain"
-                    layout="fill"
+                    src={builder.image(post.mainImage!).url()}
+                    style={{ height: "auto", width: "100%" }}
+                    width={1000}
+                    height={1000}
                     alt="image"
                   />
                 </div>
               </div>
 
               <div className="mt-6 font-body text-[20px]">
-                <PortableText value={post.body} />
+                <PortableText value={post.body!} />
               </div>
             </div>
           </main>
@@ -78,7 +78,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const query = `*[_type == "post" && slug.current == $slug][0]`;
   const post = (await client.fetch(query, {
     slug: context.params?.postSlug ?? "",
-  })) as any;
+  })) as Post;
 
   return {
     props: {

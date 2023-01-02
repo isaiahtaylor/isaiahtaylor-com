@@ -71,11 +71,21 @@ export interface Post extends SanityDocument {
   };
 
   /**
-   * Body — `string`
+   * Body — `array`
    *
-   * Markdown post.
+   *
    */
-  body?: string;
+  body?: Array<SanityKeyed<SanityBlock>>;
 }
+
+export type BlockContent = Array<
+  | SanityKeyed<SanityBlock>
+  | SanityKeyed<{
+      _type: "image";
+      asset: SanityReference<SanityImageAsset>;
+      crop?: SanityImageCrop;
+      hotspot?: SanityImageHotspot;
+    }>
+>;
 
 export type Documents = Post;
