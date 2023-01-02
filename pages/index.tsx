@@ -22,7 +22,7 @@ const client = createClient({
 });
 
 async function getPosts() {
-  const query = `*[_type == "post"]`;
+  const query = `*[_type == "post"] | order(_createdAt desc)`;
   const posts = await client.fetch(query);
   return posts;
 }
@@ -32,7 +32,7 @@ const Home: NextPage<
 > = ({ posts }) => {
   return (
     <ThemeContext.Consumer>
-      {({ colorMode, toggleTheme }) => (
+      {({ colorMode }) => (
         <div className="bg-white dark:bg-raisin-black text-eerie-black dark:text-platinum">
           <Head>
             <title>Isaiah Taylor</title>
@@ -88,7 +88,7 @@ const Home: NextPage<
                 </a>
               </div>
             </div>
-            <div className="flex flex-col justify-between grow p-10 lg:p-[100px]">
+            <div className="flex flex-col justify-between grow p-10 lg:p-[100px] lg:pr-[600px]">
               <div className="flex flex-col gap-5">
                 {posts.map((post) => (
                   <div
@@ -110,6 +110,10 @@ const Home: NextPage<
                   </div>
                 ))}
               </div>
+
+              <p className="pt-[200px] font-display font-bold text-lg text-granite-gray dark:text-grayish">
+                {"That's all for now."}
+              </p>
 
               {/* <div className="flex flex-col font-display font-bold text-xl">
                 <p>Twitter</p>
