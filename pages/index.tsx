@@ -106,7 +106,6 @@ const Home: NextPage<
                         </h2>
                       </div>
                     </Link>
-                    {/* <p>{post.body}</p> */}
                   </div>
                 ))}
               </div>
@@ -114,24 +113,10 @@ const Home: NextPage<
               <p className="pt-[200px] font-display font-bold text-lg text-granite-gray dark:text-grayish">
                 {"That's all for now."}
               </p>
-
-              {/* <div className="flex flex-col font-display font-bold text-xl">
-                <p>Twitter</p>
-                <p>Instagram</p>
-                <p>LinkedIn</p>
-              </div> */}
             </div>
             <div className="invisible lg:visible">
               <RightSide />
             </div>
-            {/* <div className="flex justify-center items-center align-middle w-[600px] h-screen">
-              <Image
-                src={colorMode === "dark" ? "/IT-dark.svg" : "/IT.svg"}
-                alt="Isaiah Taylor"
-                width={350}
-                height={350}
-              />
-            </div> */}
           </main>
         </div>
       )}
