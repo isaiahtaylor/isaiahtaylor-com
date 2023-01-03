@@ -5,7 +5,6 @@ import type {
 } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { ThemeContext } from "../contexts/themeContext";
 
 import { createClient } from "next-sanity";
 import Link from "next/link";
@@ -31,52 +30,45 @@ const Home: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ posts }) => {
   return (
-    <ThemeContext.Consumer>
-      {({ colorMode }) => (
-        <div className="bg-white dark:bg-raisin-black text-eerie-black dark:text-platinum">
-          <Head>
-            <title>Isaiah Taylor</title>
-            <meta name="description" content="Isaiah Taylor's writings" />
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
+    <div className="bg-white dark:bg-raisin-black text-eerie-black dark:text-platinum">
+      <Head>
+        <title>Isaiah Taylor</title>
+        <meta name="description" content="Isaiah Taylor's writings" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-          <main className="w-full flex flex-col justify-center align-middle items-center lg:flex-row lg:w-auto">
-            <RightSide />
-            <div className="flex flex-col justify-between grow p-10 lg:p-[100px] lg:pr-[600px]">
-              <div className="flex flex-col gap-7">
-                {posts.map((post) => (
-                  <div
-                    className="font-display font-bold cursor-pointer"
-                    key={post._id}
-                  >
-                    <Link href={`/${post.slug.current}`}>
-                      <div>
-                        <h1 className="text-2xl underline lg:text-4xl">
-                          {post.title}
-                        </h1>
-                        <h2 className="text-granite-gray text-xl dark:text-grayish">
-                          {format(
-                            parseISO(post._createdAt),
-                            "EEEE, MMMM do, yyyy"
-                          )}
-                        </h2>
-                      </div>
-                    </Link>
+      <main className="w-full flex flex-col justify-center align-middle items-center lg:flex-row lg:w-auto">
+        <RightSide />
+        <div className="flex flex-col justify-between grow p-10 lg:p-[100px] lg:pr-[600px]">
+          <div className="flex flex-col gap-7">
+            {posts.map((post) => (
+              <div
+                className="font-display font-bold cursor-pointer"
+                key={post._id}
+              >
+                <Link href={`/${post.slug.current}`}>
+                  <div>
+                    <h1 className="text-2xl underline lg:text-4xl">
+                      {post.title}
+                    </h1>
+                    <h2 className="text-granite-gray text-xl dark:text-grayish">
+                      {format(parseISO(post._createdAt), "EEEE, MMMM do, yyyy")}
+                    </h2>
                   </div>
-                ))}
+                </Link>
               </div>
+            ))}
+          </div>
 
-              <p className="pt-[200px] font-display font-bold text-lg text-granite-gray dark:text-grayish">
-                {"That's all for now."}
-              </p>
-            </div>
-            <div className="invisible lg:visible">
-              <RightSide />
-            </div>
-          </main>
+          <p className="pt-[200px] font-display font-bold text-lg text-granite-gray dark:text-grayish">
+            {"That's all for now."}
+          </p>
         </div>
-      )}
-    </ThemeContext.Consumer>
+        <div className="invisible lg:visible">
+          <RightSide />
+        </div>
+      </main>
+    </div>
   );
 };
 
