@@ -51,7 +51,9 @@ const Home: NextPage<
                   >
                     <Link href={`/${post.slug.current}`}>
                       <div>
-                        <h1 className="text-4xl">{post.title}</h1>
+                        <h1 className="text-2xl underline lg:text-4xl">
+                          {post.title}
+                        </h1>
                         <h2 className="text-granite-gray text-xl dark:text-grayish">
                           {format(
                             parseISO(post._createdAt),
