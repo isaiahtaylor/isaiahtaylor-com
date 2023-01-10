@@ -146,7 +146,7 @@ const PostPage: NextPage<
                     </a>
                   ),
                   code: ({ children }) => (
-                    <code className="bg-gray-100 dark:bg-granite-gray p-1 rounded text-sm">
+                    <code className="bg-gray-100 dark:bg-granite-gray p-1 rounded text-sm font-mono">
                       {children}
                     </code>
                   ),
