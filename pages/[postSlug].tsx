@@ -47,128 +47,132 @@ const PostPage: NextPage<
 
       <main className="flex flex-col lg:flex-row w-full justify-between">
         <RightSide />
-        <div className="flex flex-col lg:pr-[600px] p-8 lg:p-[100px]">
-          <div className="flex flex-col gap-1">
-            <Link href="/">
-              <div
-                className="font-display font-bold text-granite-gray dark:text-spanish-gray text-2xl"
-                style={{
-                  fontVariant: "small-caps",
-                }}
-              >
-                Isaiah Taylor
+        <div className="flex flex-col lg:pr-[600px] p-8 lg:p-[100px] w-full items-center">
+          <div className="lg:max-w-[800px]">
+            <div className="flex flex-col gap-1">
+              <Link href="/">
+                <div
+                  className="font-display font-bold text-granite-gray dark:text-spanish-gray text-2xl"
+                  style={{
+                    fontVariant: "small-caps",
+                  }}
+                >
+                  Isaiah Taylor
+                </div>
+              </Link>
+              <div className="flex flex-col gap-5 font-display text-[40px] font-bold">
+                {post.title}
               </div>
-            </Link>
-            <div className="flex flex-col gap-5 font-display text-[40px] font-bold">
-              {post.title}
+              <div>
+                <SocialShare></SocialShare>
+              </div>
             </div>
-            <div>
-              <SocialShare></SocialShare>
-            </div>
-          </div>
 
-          <div className="py-10 w-full">
-            <div className="relative w-full">
-              <Image
-                src={mainImage.url()}
-                style={{ height: "auto", width: "100%" }}
-                width={1000}
-                height={1000}
-                alt="image"
+            <div className="py-10 w-full">
+              <div className="relative w-full">
+                <Image
+                  src={mainImage.url()}
+                  style={{ height: "auto", width: "100%" }}
+                  width={1000}
+                  height={1000}
+                  alt="image"
+                />
+              </div>
+            </div>
+
+            <div className="mt-6 font-body text-[20px]">
+              <PortableText
+                value={post.body!}
+                components={{
+                  block: {
+                    h1: ({ children }) => (
+                      <h1 className="font-display text-4xl font-bold mt-8 mb-3">
+                        {children}
+                      </h1>
+                    ),
+                    h2: ({ children }) => (
+                      <h2 className="font-display text-3xl font-bold mt-7 mb-3">
+                        {children}
+                      </h2>
+                    ),
+                    h3: ({ children }) => (
+                      <h3 className="font-display text-2xl font-bold mt-6 mb-3">
+                        {children}
+                      </h3>
+                    ),
+                    h4: ({ children }) => (
+                      <h4 className="font-display text-xl font-bold mt-5 mb-3">
+                        {children}
+                      </h4>
+                    ),
+                    h5: ({ children }) => (
+                      <h5 className="font-display text-lg font-bold mt-4 mb-3">
+                        {children}
+                      </h5>
+                    ),
+                    h6: ({ children }) => (
+                      <h6 className="font-display text-base font-bold mt-3 mb-3">
+                        {children}
+                      </h6>
+                    ),
+                    // quote (a line of text with a left border)
+                    blockquote: ({ children }) => (
+                      <div className="border-l-4 border-granite-gray dark:border-platinum pl-4">
+                        {children}
+                      </div>
+                    ),
+                    normal: ({ children }) => (
+                      <p className="my-3">{children}</p>
+                    ),
+                  },
+                  list: {
+                    bullet: ({ children }) => (
+                      <ul className="list-disc list-inside">{children}</ul>
+                    ),
+                    number: ({ children }) => (
+                      <ol className="list-decimal list-inside">{children}</ol>
+                    ),
+                  },
+                  listItem: {
+                    bullet: ({ children }) => <li>{children}</li>,
+                    number: ({ children }) => <li>{children}</li>,
+                  },
+                  marks: {
+                    link: ({ children, value }) => (
+                      <a
+                        href={value.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500"
+                      >
+                        {children}
+                      </a>
+                    ),
+                    code: ({ children }) => (
+                      <code className="bg-gray-100 dark:bg-granite-gray p-1 rounded text-sm font-mono">
+                        {children}
+                      </code>
+                    ),
+                  },
+                  types: {
+                    image: ({ value }) => {
+                      const image = builder.image(value.asset);
+                      return (
+                        <div className="relative w-full">
+                          <Image
+                            src={image.url()}
+                            style={{ height: "auto", width: "100%" }}
+                            width={1000}
+                            height={1000}
+                            alt="image"
+                          />
+                        </div>
+                      );
+                    },
+                  },
+                }}
               />
             </div>
-          </div>
-
-          <div className="mt-6 font-body text-[20px]">
-            <PortableText
-              value={post.body!}
-              components={{
-                block: {
-                  h1: ({ children }) => (
-                    <h1 className="font-display text-4xl font-bold mt-8 mb-3">
-                      {children}
-                    </h1>
-                  ),
-                  h2: ({ children }) => (
-                    <h2 className="font-display text-3xl font-bold mt-7 mb-3">
-                      {children}
-                    </h2>
-                  ),
-                  h3: ({ children }) => (
-                    <h3 className="font-display text-2xl font-bold mt-6 mb-3">
-                      {children}
-                    </h3>
-                  ),
-                  h4: ({ children }) => (
-                    <h4 className="font-display text-xl font-bold mt-5 mb-3">
-                      {children}
-                    </h4>
-                  ),
-                  h5: ({ children }) => (
-                    <h5 className="font-display text-lg font-bold mt-4 mb-3">
-                      {children}
-                    </h5>
-                  ),
-                  h6: ({ children }) => (
-                    <h6 className="font-display text-base font-bold mt-3 mb-3">
-                      {children}
-                    </h6>
-                  ),
-                  // quote (a line of text with a left border)
-                  blockquote: ({ children }) => (
-                    <div className="border-l-4 border-granite-gray dark:border-platinum pl-4">
-                      {children}
-                    </div>
-                  ),
-                  normal: ({ children }) => <p className="my-3">{children}</p>,
-                },
-                list: {
-                  bullet: ({ children }) => (
-                    <ul className="list-disc list-inside">{children}</ul>
-                  ),
-                  number: ({ children }) => (
-                    <ol className="list-decimal list-inside">{children}</ol>
-                  ),
-                },
-                listItem: {
-                  bullet: ({ children }) => <li>{children}</li>,
-                  number: ({ children }) => <li>{children}</li>,
-                },
-                marks: {
-                  link: ({ children, value }) => (
-                    <a
-                      href={value.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-500"
-                    >
-                      {children}
-                    </a>
-                  ),
-                  code: ({ children }) => (
-                    <code className="bg-gray-100 dark:bg-granite-gray p-1 rounded text-sm font-mono">
-                      {children}
-                    </code>
-                  ),
-                },
-                types: {
-                  image: ({ value }) => {
-                    const image = builder.image(value.asset);
-                    return (
-                      <div className="relative w-full">
-                        <Image
-                          src={image.url()}
-                          style={{ height: "auto", width: "100%" }}
-                          width={1000}
-                          height={1000}
-                          alt="image"
-                        />
-                      </div>
-                    );
-                  },
-                },
-              }}
-            />
           </div>
         </div>
       </main>
