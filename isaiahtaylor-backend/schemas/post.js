@@ -19,6 +19,11 @@ export default {
       title: 'Main image',
     },
     {
+      name: 'embed',
+      type: 'string',
+      title: 'Embed',
+    },
+    {
       name: 'body',
       type: 'array',
       title: 'Body',

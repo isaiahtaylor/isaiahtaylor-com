@@ -71,6 +71,13 @@ export interface Post extends SanityDocument {
   };
 
   /**
+   * Embed — `string`
+   *
+   *
+   */
+  embed?: string;
+
+  /**
    * Body — `array`
    *
    *

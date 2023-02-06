@@ -80,6 +80,10 @@ const PostPage: NextPage<
               </div>
             </div>
 
+            <div dangerouslySetInnerHTML={
+              { __html: post.embed ?? '' }
+            } />
+
             <div className="mt-6 font-body text-[20px]">
               <PortableText
                 value={post.body!}
