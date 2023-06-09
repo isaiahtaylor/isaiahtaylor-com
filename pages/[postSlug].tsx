@@ -14,6 +14,7 @@ import { RightSide } from "../components/rightSide";
 import { Post } from "../schema";
 import Head from "next/head";
 import Link from "next/link";
+import { useMemo } from "react";
 
 const client = createClient({
   projectId: "tyc9omzx",
@@ -29,6 +30,15 @@ const PostPage: NextPage<
 > = ({ post }) => {
   const mainImage = builder.image(post.mainImage!);
   const socialImage = mainImage.width(600);
+
+  const postDate = useMemo(() => {
+    const date = new Date(post._createdAt);
+    const month = date.toLocaleString("default", { month: "short" });
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${month} ${day}, ${year}`;
+  }, [post._createdAt]);
+
   return (
     <div className="bg-white dark:bg-raisin-black text-eerie-black dark:text-platinum">
       <Head>
@@ -50,16 +60,36 @@ const PostPage: NextPage<
         <div className="flex flex-col lg:pr-[600px] p-8 lg:p-[100px] w-full items-center">
           <div className="lg:max-w-[800px]">
             <div className="flex flex-col gap-1">
-              <Link href="/">
+              <div className="flex flex-row gap-3 items-center">
+                <Link href="/">
+                  <div
+                    className="font-display font-bold text-granite-gray dark:text-spanish-gray text-2xl cursor-pointer"
+                    style={{
+                      fontVariant: "small-caps",
+                    }}
+                  >
+                    Isaiah Taylor
+                  </div>
+                </Link>
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="inline-block mt-1 text-granite-gray dark:text-spanish-gray"
+                >
+                  <circle cx="5" cy="5" r="5" fill="currentColor" />
+                </svg>
                 <div
-                  className="font-display font-bold text-granite-gray dark:text-spanish-gray text-2xl"
                   style={{
                     fontVariant: "small-caps",
                   }}
+                  className="font-display font-bold text-granite-gray dark:text-spanish-gray text-2xl"
                 >
-                  Isaiah Taylor
+                  {postDate}
                 </div>
-              </Link>
+              </div>
               <div className="flex flex-col gap-5 font-display text-[40px] font-bold">
                 {post.title}
               </div>
@@ -80,9 +110,7 @@ const PostPage: NextPage<
               </div>
             </div>
 
-            <div dangerouslySetInnerHTML={
-              { __html: post.embed ?? '' }
-            } />
+            <div dangerouslySetInnerHTML={{ __html: post.embed ?? "" }} />
 
             <div className="mt-6 font-body text-[20px]">
               <PortableText
