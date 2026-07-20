@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /studio
 Disallow: /api/
+
+Sitemap: https://isaiahtaylor.com/sitemap.xml
