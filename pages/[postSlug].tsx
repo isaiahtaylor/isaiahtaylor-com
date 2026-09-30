@@ -28,8 +28,12 @@ const builder = imageUrlBuilder(client);
 const PostPage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ post }) => {
-  const mainImage = builder.image(post.mainImage!);
-  const socialImage = mainImage.width(600);
+  const mainImageUrl = post.mainImage?.asset
+    ? builder.image(post.mainImage).url()
+    : undefined;
+  const socialImageUrl = post.mainImage?.asset
+    ? builder.image(post.mainImage).width(600).url()
+    : undefined;
 
   const postDate = useMemo(() => {
     const date = new Date(post._createdAt);
@@ -44,15 +48,21 @@ const PostPage: NextPage<
       <Head>
         <title>{`${post.title} | Isaiah Taylor`}</title>
         <meta property="og:title" content={`${post.title} | Isaiah Taylor`} />
-        <meta property="og:image" content={socialImage.url()} />
+        {socialImageUrl && (
+          <meta property="og:image" content={socialImageUrl} />
+        )}
         <meta property="og:description" content={post.description} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@isaiah_taylor" />
         <meta name="twitter:creator" content="@isaiah_taylor" />
         <meta name="twitter:title" content={`${post.title} | Isaiah Taylor`} />
         <meta name="twitter:description" content={post.description} />
-        <meta name="twitter:image" content={socialImage.url()} />
-        <meta name="twitter:image:alt" content={post.title} />
+        {socialImageUrl && (
+          <meta name="twitter:image" content={socialImageUrl} />
+        )}
+        {socialImageUrl && (
+          <meta name="twitter:image:alt" content={post.title} />
+        )}
       </Head>
 
       <main className="flex flex-col lg:flex-row w-full justify-between">
@@ -98,17 +108,19 @@ const PostPage: NextPage<
               </div>
             </div>
 
-            <div className="py-10 w-full">
-              <div className="relative w-full">
-                <Image
-                  src={mainImage.url()}
-                  style={{ height: "auto", width: "100%" }}
-                  width={1000}
-                  height={1000}
-                  alt="image"
-                />
+            {mainImageUrl && (
+              <div className="py-10 w-full">
+                <div className="relative w-full">
+                  <Image
+                    src={mainImageUrl}
+                    style={{ height: "auto", width: "100%" }}
+                    width={1000}
+                    height={1000}
+                    alt="image"
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
             <div dangerouslySetInnerHTML={{ __html: post.embed ?? "" }} />
 
