@@ -47,21 +47,31 @@ const PostPage: NextPage<
     <div className="bg-white dark:bg-raisin-black text-eerie-black dark:text-platinum">
       <Head>
         <title>{`${post.title} | Isaiah Taylor`}</title>
-        <meta property="og:title" content={`${post.title} | Isaiah Taylor`} />
-        {socialImageUrl && (
-          <meta property="og:image" content={socialImageUrl} />
-        )}
-        <meta property="og:description" content={post.description} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@isaiah_taylor" />
-        <meta name="twitter:creator" content="@isaiah_taylor" />
-        <meta name="twitter:title" content={`${post.title} | Isaiah Taylor`} />
-        <meta name="twitter:description" content={post.description} />
-        {socialImageUrl && (
-          <meta name="twitter:image" content={socialImageUrl} />
-        )}
-        {socialImageUrl && (
-          <meta name="twitter:image:alt" content={post.title} />
+        {!post.disableLinkPreview && (
+          <>
+            <meta
+              property="og:title"
+              content={`${post.title} | Isaiah Taylor`}
+            />
+            {socialImageUrl && (
+              <meta property="og:image" content={socialImageUrl} />
+            )}
+            <meta property="og:description" content={post.description} />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:site" content="@isaiah_taylor" />
+            <meta name="twitter:creator" content="@isaiah_taylor" />
+            <meta
+              name="twitter:title"
+              content={`${post.title} | Isaiah Taylor`}
+            />
+            <meta name="twitter:description" content={post.description} />
+            {socialImageUrl && (
+              <meta name="twitter:image" content={socialImageUrl} />
+            )}
+            {socialImageUrl && (
+              <meta name="twitter:image:alt" content={post.title} />
+            )}
+          </>
         )}
       </Head>
 
@@ -232,7 +242,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      post,
+      post: { ...post, disableLinkPreview: true },
     },
   };
 }

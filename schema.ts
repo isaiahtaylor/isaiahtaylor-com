@@ -90,6 +90,13 @@ export interface Post extends SanityDocument {
    * This text will be used in the meta description for SEO
    */
   description?: string;
+
+  /**
+   * Disable link preview — `boolean`
+   *
+   * Omit Open Graph / Twitter card tags so links to this post show as a plain link on X and other social sites
+   */
+  disableLinkPreview?: boolean;
 }
 
 export type BlockContent = Array<

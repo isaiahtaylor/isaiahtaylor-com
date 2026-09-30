@@ -38,5 +38,13 @@ export default defineType({
       title: "Description",
       description: "This text will be used in the meta description for SEO",
     }),
+    defineField({
+      name: "disableLinkPreview",
+      type: "boolean",
+      title: "Disable link preview",
+      description:
+        "Omit Open Graph / Twitter card tags so links to this post show as a plain link on X and other social sites",
+      initialValue: false,
+    }),
   ],
 });
