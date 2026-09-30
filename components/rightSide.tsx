@@ -42,19 +42,11 @@ export const RightSide: React.FC = () => {
         </Link>
         <div className="flex flex-row gap-1 lg:gap-0 lg:flex-col font-display font-bold text-xl text-right">
           <a
-            href="https://twitter.com/isaiah_p_taylor"
+            href="https://x.com/isaiah_p_taylor"
             target={"_blank"}
             rel="noreferrer"
           >
-            <p>Twitter</p>
-          </a>
-          <span className="lg:hidden">&middot;</span>
-          <a
-            href="https://www.instagram.com/isaiah.p.taylor/"
-            target={"_blank"}
-            rel="noreferrer"
-          >
-            <p>Instagram</p>
+            <p>X</p>
           </a>
           <span className="lg:hidden">&middot;</span>
           <a
