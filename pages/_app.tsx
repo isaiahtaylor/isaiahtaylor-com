@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { useState, useEffect } from "react";
 import { ThemeContext } from "../contexts/themeContext";
 import Head from "next/head";
+import { Analytics } from "@vercel/analytics/react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [colorMode, setColorMode] = useState<"light" | "dark">("light");
@@ -37,6 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <Component {...pageProps} />
+      <Analytics />
     </ThemeContext.Provider>
   );
 }
