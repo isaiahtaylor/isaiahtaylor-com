@@ -102,4 +102,20 @@ export type BlockContent = Array<
     }>
 >;
 
-export type Documents = Post;
+export type Documents = Post | SiteSettings;
+
+/**
+ * Site settings
+ *
+ * Singleton document with _id "siteSettings".
+ */
+export interface SiteSettings extends SanityDocument {
+  _type: "siteSettings";
+
+  /**
+   * Disable link previews — `boolean`
+   *
+   * When on, pages omit Open Graph and Twitter/X card tags.
+   */
+  disableLinkPreviews?: boolean;
+}

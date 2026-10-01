@@ -27,7 +27,7 @@ const builder = imageUrlBuilder(client);
 
 const PostPage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
-> = ({ post }) => {
+> = ({ post, linkPreviewsEnabled }) => {
   const mainImageUrl = post.mainImage?.asset
     ? builder.image(post.mainImage).url()
     : undefined;
@@ -47,21 +47,31 @@ const PostPage: NextPage<
     <div className="bg-white dark:bg-raisin-black text-eerie-black dark:text-platinum">
       <Head>
         <title>{`${post.title} | Isaiah Taylor`}</title>
-        <meta property="og:title" content={`${post.title} | Isaiah Taylor`} />
-        {socialImageUrl && (
-          <meta property="og:image" content={socialImageUrl} />
-        )}
-        <meta property="og:description" content={post.description} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@isaiah_taylor" />
-        <meta name="twitter:creator" content="@isaiah_taylor" />
-        <meta name="twitter:title" content={`${post.title} | Isaiah Taylor`} />
-        <meta name="twitter:description" content={post.description} />
-        {socialImageUrl && (
-          <meta name="twitter:image" content={socialImageUrl} />
-        )}
-        {socialImageUrl && (
-          <meta name="twitter:image:alt" content={post.title} />
+        {linkPreviewsEnabled && (
+          <>
+            <meta
+              property="og:title"
+              content={`${post.title} | Isaiah Taylor`}
+            />
+            {socialImageUrl && (
+              <meta property="og:image" content={socialImageUrl} />
+            )}
+            <meta property="og:description" content={post.description} />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:site" content="@isaiah_taylor" />
+            <meta name="twitter:creator" content="@isaiah_taylor" />
+            <meta
+              name="twitter:title"
+              content={`${post.title} | Isaiah Taylor`}
+            />
+            <meta name="twitter:description" content={post.description} />
+            {socialImageUrl && (
+              <meta name="twitter:image" content={socialImageUrl} />
+            )}
+            {socialImageUrl && (
+              <meta name="twitter:image:alt" content={post.title} />
+            )}
+          </>
         )}
       </Head>
 
@@ -229,10 +239,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const post = (await client.fetch(query, {
     slug: context.params?.postSlug ?? "",
   })) as Post;
+  const disableLinkPreviews = (await client.fetch(
+    `*[_id == "siteSettings"][0].disableLinkPreviews`,
+  )) as boolean | null;
 
   return {
     props: {
       post,
+      linkPreviewsEnabled: !disableLinkPreviews,
     },
   };
 }
