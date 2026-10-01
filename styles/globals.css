@@ -28,3 +28,11 @@ a {
     background: black;
   }
 }
+
+/* On phones, leave room below the last paragraph so it can scroll clear of
+   in-app browser toolbars and bottom sheets (e.g. X, Facebook). */
+@media (max-width: 1023px) {
+  .post-content {
+    padding-bottom: calc(16rem + env(safe-area-inset-bottom));
+  }
+}

@@ -67,7 +67,7 @@ const PostPage: NextPage<
 
       <main className="flex flex-col lg:flex-row w-full justify-between">
         <RightSide />
-        <div className="flex flex-col lg:pr-[600px] p-8 lg:p-[100px] w-full items-center">
+        <div className="post-content flex flex-col lg:pr-[600px] p-8 lg:p-[100px] w-full items-center">
           <div className="lg:max-w-[800px]">
             <div className="flex flex-col gap-1">
               <div className="flex flex-row gap-3 items-center">
